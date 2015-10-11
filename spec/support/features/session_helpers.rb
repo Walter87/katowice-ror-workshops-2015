@@ -1,5 +1,4 @@
-module Features
-  module SessionHelpers
+module SessionHelpers
     def sign_up_with(email, password)
       visit new_user_registration_path
       fill_in 'Email', with: email
@@ -22,4 +21,10 @@ module Features
       click_on 'Logout'
     end
   end
+
+
+RSpec.configure do |config|
+  # Remove the equivalent line from spec_helper.rb
+  config.include(SessionHelpers)
 end
+
