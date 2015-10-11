@@ -22,10 +22,11 @@ class StudentsController < ApplicationController
     student.destroy
     redirect_to students_path, notice: I18n.t('shared.deleted', resource: 'Student')
   end
-end
+
 
 private
 
 def student_params
   params.require(:student).permit(:first_name, :last_name)
- end    
+ end  
+ end  
