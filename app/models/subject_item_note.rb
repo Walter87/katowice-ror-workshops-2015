@@ -1,5 +1,6 @@
 class SubjectItemNote < ActiveRecord::Base
   belongs_to :student
+  belongs_to :subject_item, dependent: :destroy
 
   validates :student_id, :subject_item_id, presence: true
 
