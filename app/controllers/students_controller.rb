@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  before_action :authenticate_user!, only: [:show]
   expose(:student, attributes: :student_params)
   expose(:student_subject_items) { student.subject_items }
   expose_decorated(:students)
@@ -23,8 +24,9 @@ class StudentsController < ApplicationController
     student.destroy
     redirect_to students_path, notice: I18n.t('shared.deleted', resource: 'Student')
   end
-
-
+  
+  def subjects
+  end
 private
 
 def student_params

@@ -24,6 +24,9 @@ class TeachersController < ApplicationController
     redirect_to teachers_path, notice: I18n.t('shared.deleted', resource: 'Teacher')
   end
 
+  def subjects 
+  end
+
   private
 
   def teacher_params
