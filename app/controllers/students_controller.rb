@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :authenticate_user!, only: [:show]
+  before_action :authenticate_user!
   expose(:student, attributes: :student_params)
   expose(:student_subject_items) { student.subject_items }
   expose_decorated(:students)
@@ -30,6 +30,7 @@ class StudentsController < ApplicationController
 private
 
 def student_params
-  params.require(:student).permit(:first_name, :last_name)
+  params.require(:student).permit(:first_name, :last_name, subject_item_ids: [])
+
  end  
  end  
