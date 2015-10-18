@@ -1,6 +1,6 @@
+language: ruby
 rvm:
   - 2.2.0
-  - rbx
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database workshops_k_test;' -U postgres
