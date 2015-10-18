@@ -20,6 +20,7 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'dotenv-rails'
 gem 'gretel'
+gem 'faker'
 
 group :development do
   gem 'better_errors'
@@ -28,7 +29,7 @@ group :development do
   gem 'rails_layout'
   gem 'spring-commands-rspec'
   gem 'quiet_assets'
-  gem 'faker'
+
 end
 
 group :development, :test do
