@@ -1,0 +1,15 @@
+connection: &connection
+  adapter: postgresql
+  encoding: unicode
+  host:     localhost
+  pool: 5
+  username: workshops
+  password: pass1234
+
+development:
+  <<: *connection
+  database: workshops_k_development
+
+test: &test
+  <<: *connection
+  database: workshops_k_test
