@@ -2,6 +2,6 @@ rvm:
   - 2.2.0
   - rbx
 before_script:
-  - psql -c 'create database workshops_test;' -U postgres
+  - psql -c 'create database workshops_k_test;' -U postgres
 addons:
   postgresql: '9.3'
