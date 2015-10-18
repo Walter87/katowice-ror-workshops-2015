@@ -1,6 +1,10 @@
 = simple_form_for student do |f|
   = f.input :first_name
   = f.input :last_name
+  .form-inline
+    = f.input :birthdate, label: "Date of birth:   ", :as => :date,
+          :start_year => 1910, :end_year => 2010,
+          :order => [:year, :month, :day], :include_blank => true
   = f.association :subject_items, label_method: :title, value_method: :id, label: 'Subject Items', as: :check_boxes
   = link_to t('shared.back'), students_path, class: 'btn btn-default'
   = f.button :submit

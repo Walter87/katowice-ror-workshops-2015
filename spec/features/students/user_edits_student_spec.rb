@@ -42,4 +42,47 @@ feature 'User edits student' do
     visit report_subjects_path
     expect(page).to have_content 'Jan Abacki'
   end
+
+  scenario 'by assigning subject item and birthdate' do
+    visit report_subjects_path
+    expect(page).to have_no_content 'Jan Abacki'
+
+    visit students_path
+    find(:xpath, "//a[@title='edit']").click
+    find("input[type='checkbox']").set(true)
+    select "1987", from: "student[birthdate(1i)]"
+    select "August", from: "student[birthdate(2i)]"
+    select "27", from: "student[birthdate(3i)]"
+    click_button 'Update Student'
+
+    visit report_subjects_path
+    expect(page).to have_content 'Jan Abacki'
+    expect(page).to have_content '1987-08-27'
+  end
+
+  scenario 'by assigning subject item and birthdate and deleting birthdate after' do
+    visit students_path
+    find(:xpath, "//a[@title='edit']").click
+    find("input[type='checkbox']").set(true)
+    select "1987", from: "student[birthdate(1i)]"
+    select "August", from: "student[birthdate(2i)]"
+    select "27", from: "student[birthdate(3i)]"
+    click_button 'Update Student'
+
+    visit report_subjects_path
+    expect(page).to have_content 'Jan Abacki'
+    expect(page).to have_content '1987-08-27'
+
+    visit students_path
+    find(:xpath, "//a[@title='edit']").click
+    select "", from: "student[birthdate(1i)]"
+    select "", from: "student[birthdate(2i)]"
+    select "", from: "student[birthdate(3i)]"
+    click_button 'Update Student'
+
+    visit report_subjects_path
+    expect(page).to have_content 'Jan Abacki'
+    expect(page).to have_no_content '1987-08-27'
+  end
+
 end

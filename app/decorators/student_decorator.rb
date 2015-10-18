@@ -19,4 +19,8 @@ class StudentDecorator < BaseDecorator
     h.number_with_precision(sum, precision: 2)
   
   end
+
+  def date_of_birth
+    "#{birthdate}" if self.birthdate != ""
+  end
 end
