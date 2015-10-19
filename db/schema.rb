@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018113617) do
+ActiveRecord::Schema.define(version: 20151019172504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(version: 20151018113617) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "incomes", force: :cascade do |t|
+    t.integer  "payment_id"
+    t.integer  "student_id"
+    t.boolean  "received"
+    t.date     "income_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "incomes", ["payment_id"], name: "index_incomes_on_payment_id", using: :btree
+  add_index "incomes", ["student_id"], name: "index_incomes_on_student_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.string   "title"
@@ -40,6 +52,21 @@ ActiveRecord::Schema.define(version: 20151018113617) do
 
   add_index "participations", ["student_id"], name: "index_participations_on_student_id", using: :btree
   add_index "participations", ["subject_item_id"], name: "index_participations_on_subject_item_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.date     "month"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "periods", force: :cascade do |t|
+    t.date     "month"
+    t.integer  "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "periods", ["student_id"], name: "index_periods_on_student_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
@@ -79,6 +106,17 @@ ActiveRecord::Schema.define(version: 20151018113617) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "tuitions", force: :cascade do |t|
+    t.integer  "period_id"
+    t.integer  "student_id"
+    t.date     "payment_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "tuitions", ["period_id"], name: "index_tuitions_on_period_id", using: :btree
+  add_index "tuitions", ["student_id"], name: "index_tuitions_on_student_id", using: :btree
+
   create_table "user_categories", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "category_id"
@@ -107,11 +145,16 @@ ActiveRecord::Schema.define(version: 20151018113617) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "incomes", "payments"
+  add_foreign_key "incomes", "students"
   add_foreign_key "participations", "students"
   add_foreign_key "participations", "subject_items"
+  add_foreign_key "periods", "students"
   add_foreign_key "subject_item_notes", "students"
   add_foreign_key "subject_item_notes", "subject_items"
   add_foreign_key "subject_items", "students"
   add_foreign_key "subject_items", "teachers"
+  add_foreign_key "tuitions", "periods"
+  add_foreign_key "tuitions", "students"
   add_foreign_key "user_categories", "categories"
 end

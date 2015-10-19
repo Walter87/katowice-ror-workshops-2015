@@ -1,6 +1,5 @@
 class StudentDecorator < BaseDecorator
   delegate_all
-  #decorates_association :subject_item
   
   def full_name
     "#{first_name} #{last_name}"
@@ -11,13 +10,11 @@ class StudentDecorator < BaseDecorator
     sum = 0.0
   	if notes.any?
       notes.each do |x|
-        sum = sum+x.value        
+        sum = sum + x.value        
       end
-      sum = sum/notes.count
-      
+      sum = sum / notes.count
   	end
     h.number_with_precision(sum, precision: 2)
-  
   end
 
   def date_of_birth

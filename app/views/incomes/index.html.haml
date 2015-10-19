@@ -1,0 +1,21 @@
+- breadcrumb :payments
+%h1=student.decorate.full_name
+%table.table.table-condensed
+  %thead
+    %tr
+      %th= t('income.columns.payment')
+      %th= t('income.columns.recaived')
+      %th= t('income.columns.income')
+      %th= t('income.columsn.edit')
+  %tbody
+    - student.incomes.each do |income|
+      %tr
+        %td= income.payment.month.strftime("%Y-%m")
+        %td= income.received
+        %td= income.income_date 
+        %td
+          =link_to edit_student_income_path(student, income), { title: t('shared.edit') } do
+            %button.btn.btn-default
+              = fa_icon "edit"
+
+   

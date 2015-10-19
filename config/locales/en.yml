@@ -6,9 +6,11 @@ en:
     teachers: Teachers
     reports: Reports
     reports_subjects: Subjects
+    paid_tuition: Paid Tuition
     logout: Logout
     signin: Sign in
     signup: Sign up
+    payments: Student payments
   shared:
     created: "%{resource} has been created!"
     updated: "%{resource} has been updated!"
@@ -21,11 +23,13 @@ en:
     back: Back
     add_new_item: Add new one
     subjects: subjects
+    payments: payments
   student:
     columns:
       first_name: first name
       last_name: last name
       birthdate: birthdate
+      payments: payments
   teacher:
     columns:
       first_name: first name
@@ -36,3 +40,10 @@ en:
       full_name: Full name
       avg_notes: Notes average
       birth_date: Date of birth
+  income:
+    columns:
+      payment: Payment for
+      recaived: Recaived
+      income: Income date
+      edit: Edit
+       

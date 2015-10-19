@@ -40,5 +40,23 @@ SubjectItem.all.each do |subject_item|
     end
   end
 end
+i=2
+48.times do
+  Payment.create!(
+    month: DateTime.new(2011,7) + i.months
+    )
+  i+=1
+end
+payments = Payment.all
+students.each do |student|
+  for i in payments do
+    Income.create!(
+      payment_id: i.id,
+      student_id: student.id,
+      received: true,
+      income_date: i.month + 28.days
+      )
+  end
+end
 
 puts "Seeds: done"

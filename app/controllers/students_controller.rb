@@ -2,6 +2,7 @@ class StudentsController < ApplicationController
   before_action :authenticate_user!
   expose(:student, attributes: :student_params)
   expose(:student_subject_items) { student.subject_items }
+  expose(:student_payments) { student.payments }
   expose_decorated(:students)
 
   def create
@@ -27,10 +28,13 @@ class StudentsController < ApplicationController
   
   def subjects
   end
+
+  def paid_tuition
+     
+  end
 private
 
-def student_params
-  params.require(:student).permit(:first_name, :last_name, :birthdate, subject_item_ids: [])
-
- end  
- end  
+  def student_params
+    params.require(:student).permit(:first_name, :last_name, :birthdate, subject_item_ids: [], payments: [])
+  end  
+end  
